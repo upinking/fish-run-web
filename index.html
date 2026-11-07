@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#e8f8ff">
+  <title>肥鱼跑酷 · 海滨算力站</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+  <main id="game" aria-label="肥鱼跑酷">
+    <div id="viewport" aria-label="海滨算力站三维赛道"></div>
+
+    <section id="start-screen" class="title-screen" aria-label="主菜单">
+      <img class="title-backdrop" src="/menu/title-station.png" width="1672" height="941" alt="" fetchpriority="high">
+      <div class="title-atmosphere" aria-hidden="true">
+        <i style="--x:47%;--y:35%;--delay:-2s"></i>
+        <i style="--x:49%;--y:31%;--delay:-4s"></i>
+        <i style="--x:52%;--y:37%;--delay:-1s"></i>
+        <i style="--x:55%;--y:33%;--delay:-5s"></i>
+        <i style="--x:57%;--y:39%;--delay:-3s"></i>
+        <i style="--x:48%;--y:45%;--delay:-.5s"></i>
+        <i style="--x:52%;--y:50%;--delay:-5.5s"></i>
+        <i style="--x:55%;--y:56%;--delay:-3.5s"></i>
+      </div>
+      <div class="title-character" aria-hidden="true">
+        <div class="title-shadow"></div>
+        <div class="title-float">
+          <img class="title-figure" src="/menu/title-figure.png" width="1671" height="941" alt="">
+          <img class="title-blink" src="/menu/title-blink.png" width="222" height="126" alt="">
+          <svg class="title-steam" viewBox="0 0 38 54" fill="none">
+            <path d="M11 48C3 37 25 35 16 19"/>
+            <path d="M25 51C15 40 37 36 27 21"/>
+          </svg>
+        </div>
+      </div>
+      <div class="title-content">
+        <p class="title-kicker">无限跑酷 · 干饭出发</p>
+        <h1><span>大肥鱼，</span><em>开饭啦。</em></h1>
+        <p class="title-lede">穿过海边的三条轨道，躲开列车，多吃几口白饭。</p>
+        <button id="start" class="title-mode" type="button" disabled aria-labelledby="start-label">
+          <span class="title-mode-icon" aria-hidden="true"><svg viewBox="0 0 32 28" fill="none"><path d="M7 25 12 3m13 22L20 3m-4 2v5m0 4v4m0 4v3"/></svg></span>
+          <span class="title-mode-copy">
+            <strong id="start-label">正在加载赛道…</strong>
+            <span>海滨算力站 · 无限跑酷</span>
+          </span>
+          <span class="title-record">最远<strong><span id="menu-best">0</span> m</strong></span>
+        </button>
+        <p id="load-note" class="title-load-note" role="status">正在准备 3D 场景</p>
+      </div>
+      <p class="title-controls">← → 换道 <span>·</span> 空格跳跃 <span>·</span> ↓ 翻滚 <span>·</span> Q 召唤</p>
+    </section>
+
+    <header class="masthead">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">FR</span>
+        <span>肥鱼跑酷<small>FISH RUN</small></span>
+      </div>
+      <div class="top-actions">
+        <span id="zone-name" class="prototype-badge">海滨算力站</span>
+        <button id="pause" class="square" type="button" aria-label="暂停" title="暂停 · Esc" hidden>Ⅱ</button>
+      </div>
+    </header>
+
+    <section id="hud" aria-label="本局状态" hidden>
+      <div class="score glass">
+        <span class="stat-label">本次距离</span>
+        <div><strong id="distance">0</strong><span class="unit">m</span></div>
+        <span class="stat-label">最远 <span id="best">0</span> m</span>
+        <div class="score-footer">
+          <span>白饭 <strong id="rice">0</strong></span>
+          <span id="shield">护盾 × 1</span>
+        </div>
+      </div>
+      <button id="summon" class="skill glass" type="button" disabled>
+        <span class="skill-key">Q</span>
+        <span class="skill-copy">
+          <strong>呼叫梁文峰</strong>
+          <span id="skill-status">算力 0%</span>
+          <span class="meter"><span id="energy"></span></span>
+        </span>
+      </button>
+    </section>
+
+    <div id="coach" class="coach glass" hidden>
+      <span><kbd>←</kbd> <kbd>→</kbd> 换道</span>
+      <span><kbd>空格</kbd> 跳跃</span>
+      <span><kbd>↓</kbd> 翻滚</span>
+    </div>
+    <p id="notice" class="notice" role="status" hidden></p>
+
+    <div id="summon-cut-in" class="summon-cut-in" role="status" hidden>
+      <img class="summon-cut-in-portrait" src="/effects/summon-cutout.webp" alt="">
+      <strong class="summon-cut-in-label">算力支援</strong>
+    </div>
+
+    <div id="dialog" class="overlay" hidden>
+      <section class="dialog-card" role="dialog" aria-modal="true" aria-labelledby="dialog-title">
+        <p class="eyebrow">三道追逐</p>
+        <h2 id="dialog-title">休息一下</h2>
+        <p id="dialog-description"></p>
+        <div id="result" class="result" hidden>
+          <div>本次距离<strong id="result-distance">0 m</strong></div>
+          <div>吃到白饭<strong id="result-rice">0</strong></div>
+        </div>
+        <button id="dialog-primary" class="primary" type="button">继续跑</button>
+        <button id="home" class="secondary" type="button">返回主菜单</button>
+      </section>
+    </div>
+  </main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

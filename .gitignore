@@ -1,0 +1,10 @@
+node_modules/
+dist/
+output/
+.playwright-cli/
+.DS_Store
+__pycache__/
+reference/
+public/effects/summon.jpg
+public/models/runner-preview.glb
+public/models/runner-whale-maid.glb
